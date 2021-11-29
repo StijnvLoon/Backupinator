@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, ipcMain, ipcRenderer} = require('electron')
 const contextMenu = require('electron-context-menu')
 const url = require("url");
 const path = require("path");
@@ -20,7 +20,8 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     webPreferences: {
         nodeIntegration: true,
-        spellcheck: true
+        spellcheck: true,
+        contextIsolation: false
     },
     show: false,
   })
@@ -38,6 +39,10 @@ function createWindow () {
 
   mainWindow.on('closed', function () {
     mainWindow = null
+  })
+
+  ipcMain.on('test', (event, data) => {
+    console.log(data)
   })
 }
 
