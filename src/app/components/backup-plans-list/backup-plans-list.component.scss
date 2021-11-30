@@ -1,0 +1,32 @@
+@import "../../../theme.scss";
+
+.container {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.plan {
+    width: -webkit-fill-available;
+    height: 60px;
+    background-color: rgb(71, 71, 71);
+    border-right: solid 4px mat-color($primary);
+    border-radius: 2px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    cursor: pointer;
+    transition: border 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+    user-select: none;
+}
+
+.plan_selected {
+    border-right: solid 12px mat-color($primary);
+}

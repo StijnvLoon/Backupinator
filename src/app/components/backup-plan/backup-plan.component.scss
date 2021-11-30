@@ -1,0 +1,32 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plan_holder {
+    width: 95%;
+    height: 95%;
+    background-color: rgb(71, 71, 71);
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.plan_name {
+    all: unset;
+    margin: 20px;
+    padding: 5px;
+    font-size: 1.8em;
+    width: -webkit-fill-available;
+    background: rgba(255, 255, 255, 0);
+    transition: background 0.15s ease;
+    border-radius: 2px;
+}
+.plan_name:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+.plan_name:focus {
+    background: rgba(255, 255, 255, 0.2);
+}
