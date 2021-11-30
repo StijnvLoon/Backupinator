@@ -1,3 +1,5 @@
+@import "../../../theme.scss";
+
 .container {
     width: 100%;
     height: 100%;
@@ -14,9 +16,32 @@
     margin: 10px;
 }
 
+.plan_activater {
+    margin: 20px;
+    margin-bottom: 0px;
+    width: -webkit-fill-available;
+    height: 40px;
+    background-color: mat-color($primary);
+    cursor: pointer;
+    border-radius: 2px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+.plan_activater_loader {
+    width: 600px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.171);
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
 .plan_name {
     all: unset;
     margin: 20px;
+    margin-top: 10px;
     padding: 5px;
     font-size: 1.8em;
     width: -webkit-fill-available;
