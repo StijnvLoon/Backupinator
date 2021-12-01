@@ -8,8 +8,6 @@ import { BackupPlanService } from './services/backup-plan.service';
 })
 export class AppComponent {
 
-  constructor(private backupPlanService: BackupPlanService) {
-    backupPlanService.makeRequest()
-  }
+  constructor() { }
 
 }

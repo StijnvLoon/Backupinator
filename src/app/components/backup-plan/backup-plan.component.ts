@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BackupPlan } from 'src/app/models/BackupPlan';
 import { BackupPlanService } from 'src/app/services/backup-plan.service';
+import { BackupService } from 'src/app/services/backup.service';
 
 @Component({
   selector: 'app-backup-plan',
@@ -11,22 +12,26 @@ export class BackupPlanComponent {
 
   private progress: Progress
 
-  constructor(private backupPlanService: BackupPlanService) { }
+  constructor(
+    private backupPlanService: BackupPlanService,
+    private backupService: BackupService
+    ) { }
 
   getSelectedPlan(): BackupPlan {
     return this.backupPlanService.selectedBackupPlan
   }
 
   startBackup() {
-    this.progress = new Progress()
-    const interval = setInterval(() => {
-      if(this.progress.index == this.progress.total) {
-        this.progress = undefined
-        clearInterval(interval)
-      } else {
-        this.progress.index += 1
-      }
-    }, 2000)
+    // this.progress = new Progress()
+    // const interval = setInterval(() => {
+    //   if(this.progress.index == this.progress.total) {
+    //     this.progress = undefined
+    //     clearInterval(interval)
+    //   } else {
+    //     this.progress.index += 1
+    //   }
+    // }, 2000)
+    this.backupService.makeBackup(this.getSelectedPlan())
   }
 
   updateSelectedPlan() {

@@ -8,9 +8,10 @@ import { BackupPlan } from '../models/BackupPlan';
 export class BackupPlanService {
 
   plans: BackupPlan[] = [
-    new BackupPlan('General', [], []),
+    new BackupPlan('General', ['F:\\backups'], []),
     new BackupPlan('Test', [], []),
-    new BackupPlan('Special', [], [])
+    new BackupPlan('Special', [], []),
+    new BackupPlan('Downloads', ['F:\\backups'], ['C:\\Users\\Stijn van Loon\\Downloads'])
   ]
   
   selectedBackupPlan: BackupPlan = this.plans[0]
@@ -19,9 +20,5 @@ export class BackupPlanService {
 
   getBackupPlans(): BackupPlan[] {
     return this.plans
-  }
-
-  makeRequest() {
-    // electron.ipcRenderer.send('test', 'kaas is een zoogdier');
   }
 }

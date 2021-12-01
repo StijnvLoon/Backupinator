@@ -2,6 +2,8 @@ const {app, BrowserWindow, ipcMain, ipcRenderer} = require('electron')
 const contextMenu = require('electron-context-menu')
 const url = require("url");
 const path = require("path");
+const fs = require("fs");
+const BackupHandler = require('./electron/backupHandler');
 
 let mainWindow
 
@@ -41,9 +43,7 @@ function createWindow () {
     mainWindow = null
   })
 
-  ipcMain.on('test', (event, data) => {
-    console.log(data)
-  })
+  const backupHandler = new BackupHandler()
 }
 
 app.on('ready', createWindow)
