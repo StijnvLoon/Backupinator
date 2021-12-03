@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BackupPlan } from 'src/app/models/BackupPlan';
+import { Progress } from 'src/app/models/Progress';
 import { BackupPlanService } from 'src/app/services/backup-plan.service';
 import { BackupService } from 'src/app/services/backup.service';
 
@@ -9,8 +10,6 @@ import { BackupService } from 'src/app/services/backup.service';
   styleUrls: ['./backup-plan.component.scss']
 })
 export class BackupPlanComponent {
-
-  private progress: Progress
 
   constructor(
     private backupPlanService: BackupPlanService,
@@ -22,34 +21,31 @@ export class BackupPlanComponent {
   }
 
   startBackup() {
-    // this.progress = new Progress()
-    // const interval = setInterval(() => {
-    //   if(this.progress.index == this.progress.total) {
-    //     this.progress = undefined
-    //     clearInterval(interval)
-    //   } else {
-    //     this.progress.index += 1
-    //   }
-    // }, 2000)
-    this.backupService.makeBackup(this.getSelectedPlan())
+    if(!this.getProgress()) {
+      this.backupService.makeBackup(this.getSelectedPlan())
+    }
   }
 
   updateSelectedPlan() {
     console.log('updated!')
   }
 
+  getProgress(): Progress {
+    return this.backupService.progress
+  }
+
   getLoaderText(): string {
-    if(this.progress) {
-      const percentage = Math.round((this.progress.index / this.progress.total * 100) * 1) / 1
-      return `File ${this.progress.index}/${this.progress.total} (${percentage}%)`
+    if(this.getProgress()) {
+      const percentage = Math.round((this.getProgress().index / this.getProgress().total * 100) * 1) / 1
+      return `${this.getProgress().fileName} ${this.getProgress().index}/${this.getProgress().total} (${percentage}%)`
     } else {
       return 'Make Backup'
     }
   }
 
   getLoaderStyle(): object {
-    if(this.progress) {
-      const width: string = (this.progress.index / this.progress.total * 100) + '%'
+    if(this.getProgress()) {
+      const width: string = (this.getProgress().index / this.getProgress().total * 100) + '%'
 
       return {
         'width': width
@@ -58,10 +54,4 @@ export class BackupPlanComponent {
       return {'width': '0%'}
     }
   }
-}
-
-class Progress {
-  public fileName: string = ''
-  public index: number = 0
-  public total: number = 3
 }

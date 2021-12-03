@@ -2,47 +2,70 @@ const { ipcMain } = require('electron')
 const fs = require("fs")
 
 class BackupHandler {
-    constructor() {
+
+    onProgressUpdate
+    progressCounter = 0
+
+    constructor(onProgressUpdate) {
+        this.onProgressUpdate = onProgressUpdate
         ipcMain.on('backup', (event, data) => {
-            this.makeBackup(JSON.parse(data))
+            // event.sender.send('progress-update', {
+            //     "fileName": 'fileName',
+            //     "index": 2,
+            //     "total": 100
+            // });
+            this.makeBackup(event, JSON.parse(data))
         })
     }
 
-    makeBackup(backupPlan) {
+    async makeBackup(event, backupPlan) {
+
         const content = this.getAllContent(backupPlan.sourceDirs)
 
-        backupPlan.targetDirs.forEach(targetDir => {
+        for (const targetDir of backupPlan.targetDirs) {
             //create main folder
             const fullPath = targetDir + '\\' + this.generateBackupFolderName(backupPlan)
             if (!fs.existsSync(fullPath)) {
                 fs.mkdirSync(fullPath, { recursive: true });
             }
-            
-            this.copyContent(content, fullPath)
-        })
+
+            await this.copyContent(event, content, fullPath)
+        }
     }
 
-    copyContent(content, targetDir) {
-        content.forEach(sourceDir => {
-            if(typeof sourceDir == 'string') {
+    async copyContent(event, content, targetDir, totalSize = this.getTotalContentSize(content)) {
+
+        // const totalSize = 100
+        // const counter = 0
+
+        //TODO algemene counter maken
+
+        for (const sourceDir of content) {
+             if (typeof sourceDir == 'string') {
                 //file
                 const fileName = sourceDir.split('\\').pop()
                 const fullPath = targetDir + '\\' + fileName
 
                 //copy content
-                fs.copyFileSync(sourceDir, fullPath)
+                fs.copyFile(sourceDir, fullPath, () => {
+                    this.progressCounter++
+                    this.updateProgress(event, fileName, totalSize)
+                })
             } else {
                 //folder
                 const folderName = sourceDir.folder.split('\\').pop()
                 const fullPath = targetDir + '\\' + folderName
 
-                //creat folder
-                fs.mkdirSync(fullPath, { recursive: true });
+                //create folder
+                fs.mkdir(fullPath, { recursive: true }, () => {
+                    this.progressCounter++
+                    this.updateProgress(event, folderName, totalSize)
 
-                //copy content
-                this.copyContent(sourceDir.dirs, fullPath)
+                    //copy content
+                    this.copyContent(event, sourceDir.dirs, fullPath, totalSize)
+                });
             }
-        })
+        }
     }
 
     getAllContent(sourceDirs) {
@@ -85,6 +108,34 @@ class BackupHandler {
         const seconds = currentDate.getSeconds()
 
         return `${backupPlan.name} ${day}-${month}-${year} ${hours}${minutes}${seconds}`
+    }
+
+    getTotalContentSize(content) {
+        let counter = 0
+
+        for (const sourceDir of content) {
+            counter++
+
+            if (typeof sourceDir !== 'string') {
+                counter += this.getTotalContentSize(sourceDir.dirs)
+            }
+        }
+
+        return counter
+    }
+
+    updateProgress(event, fileName, totalSize) {
+        event.sender.send('progress-update', {
+            "fileName": fileName,
+            "index": this.progressCounter,
+            "total": totalSize
+        });
+
+        this.onProgressUpdate(this.progressCounter, totalSize)
+
+        if(this.progressCounter >= totalSize) {
+            this.progressCounter = 0
+        }
     }
 }
 

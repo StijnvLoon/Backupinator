@@ -43,7 +43,13 @@ function createWindow () {
     mainWindow = null
   })
 
-  const backupHandler = new BackupHandler()
+  const backupHandler = new BackupHandler((index, total) => {
+    if(index >= total) {
+      mainWindow.setProgressBar(-1)
+    } else {
+      mainWindow.setProgressBar(((index / total) * 1) / 1)
+    }
+  })
 }
 
 app.on('ready', createWindow)

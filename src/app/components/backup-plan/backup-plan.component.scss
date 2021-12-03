@@ -30,6 +30,9 @@
     align-items: center;
     user-select: none;
 }
+.plan_activater_disabled {
+    cursor: wait !important;
+}
 .plan_activater_loader {
     width: 600px;
     height: 40px;
