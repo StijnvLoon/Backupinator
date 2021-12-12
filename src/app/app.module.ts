@@ -9,12 +9,17 @@ import { MatRippleModule } from '@angular/material/core';
 import { BackupPlansListComponent } from './components/backup-plans-list/backup-plans-list.component';
 import { BackupPlanComponent } from './components/backup-plan/backup-plan.component';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { LoaderComponent } from './components/backup-plan/loader/loader.component';
+import { DirsKeeperComponent } from './components/backup-plan/dirs-keeper/dirs-keeper.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BackupPlansListComponent,
-    BackupPlanComponent
+    BackupPlanComponent,
+    LoaderComponent,
+    DirsKeeperComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatRippleModule
+    MatRippleModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

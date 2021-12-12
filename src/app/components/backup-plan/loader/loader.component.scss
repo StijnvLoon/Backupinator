@@ -1,0 +1,24 @@
+@import "../../../../theme.scss";
+
+.plan_activater {
+    width: -webkit-fill-available;
+    height: 40px;
+    background-color: mat-color($primary);
+    cursor: pointer;
+    border-radius: 2px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+.plan_activater_disabled {
+    cursor: wait !important;
+}
+.plan_activater_loader {
+    width: 600px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.171);
+    position: absolute;
+    transition: all 0.3s ease;
+}

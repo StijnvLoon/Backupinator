@@ -1,0 +1,15 @@
+<p class="header">{{name}}:</p>
+<div class="dirs_list mat-elevation-z1">
+    <div class="dir" *ngFor="let dir of dirs">
+        <p>{{dir}}</p>
+        <div class="spacer"></div>
+        <div class="buttons_list">
+            <div class="action_button" (click)="openFolder(dir)">
+                <mat-icon>folder_open</mat-icon>
+            </div>
+            <div class="action_button" (click)="removeDir(dir)">
+                <mat-icon>close</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,4 @@
+<div class="plan_activater mat-elevation-z2" matRipple (click)="startBackup()" [class.plan_activater_disabled]="getProgress() !== undefined">
+    <div class="plan_activater_loader" [ngStyle]="getLoaderStyle()"></div>
+    <div>{{getLoaderText()}}</div>
+</div>

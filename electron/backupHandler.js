@@ -9,12 +9,8 @@ class BackupHandler {
     constructor(onProgressUpdate) {
         this.onProgressUpdate = onProgressUpdate
         ipcMain.on('backup', (event, data) => {
-            // event.sender.send('progress-update', {
-            //     "fileName": 'fileName',
-            //     "index": 2,
-            //     "total": 100
-            // });
-            this.makeBackup(event, JSON.parse(data))
+            // this.makeBackup(event, JSON.parse(data))
+            require('child_process').exec('start "" "c:\\users"');
         })
     }
 
@@ -34,11 +30,6 @@ class BackupHandler {
     }
 
     async copyContent(event, content, targetDir, totalSize = this.getTotalContentSize(content)) {
-
-        // const totalSize = 100
-        // const counter = 0
-
-        //TODO algemene counter maken
 
         for (const sourceDir of content) {
              if (typeof sourceDir == 'string') {
@@ -107,7 +98,7 @@ class BackupHandler {
         const minutes = currentDate.getMinutes()
         const seconds = currentDate.getSeconds()
 
-        return `${backupPlan.name} ${day}-${month}-${year} ${hours}${minutes}${seconds}`
+        return `${backupPlan.name} ${year}-${month}-${day} ${hours}-${minutes}-${seconds}`
     }
 
     getTotalContentSize(content) {
