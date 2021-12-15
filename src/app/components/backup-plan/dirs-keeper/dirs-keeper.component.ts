@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BackupPlanService } from 'src/app/services/backup-plan.service';
+import { DialogService } from 'src/app/services/dialog.service';
 import { FolderService } from 'src/app/services/folder.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class DirsKeeperComponent {
 
   constructor(
     private folderService: FolderService,
-    private backupPlanService: BackupPlanService
+    private backupPlanService: BackupPlanService,
+    private dialogService: DialogService
   ) { }
 
   openFolder(folder: string) {
@@ -25,6 +27,12 @@ export class DirsKeeperComponent {
   removeDir(dir: string) {
     this.dirs.splice(this.dirs.indexOf(dir), 1)
     this.backupPlanService.saveBackupPlans()
+  }
+
+  openSelector() {
+    this.dialogService.showDirsPickerDialog((data) => {
+
+    })
   }
 
 }
