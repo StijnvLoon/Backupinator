@@ -17,14 +17,20 @@
     margin: 20px;
 }
 
-.plan_name {
-    all: unset;
+.name_container {
+    display: flex;
     margin-top: 10px;
     margin-bottom: 10px;
+    width: -webkit-fill-available;
+    gap: 5px;
+}
+
+.plan_name {
+    all: unset;
     padding: 5px;
     padding-left: 0px;
     font-size: 1.8em;
-    width: -webkit-fill-available;
+    width: 100%;
     background: rgba(255, 255, 255, 0);
     transition: background 0.15s ease;
     border-radius: 2px;
@@ -34,4 +40,22 @@
 }
 .plan_name:focus {
     background: rgba(255, 255, 255, 0.2);
+}
+
+.delete_button {
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    color: mat-color($primary);
+    background-color: transparent;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.delete_button:hover {
+    color: white;
+    background-color: mat-color($primary);
 }

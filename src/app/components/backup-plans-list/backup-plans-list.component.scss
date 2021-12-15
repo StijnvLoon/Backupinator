@@ -3,9 +3,14 @@
 .container {
     width: 100%;
     max-width: 100%;
-    height: 100%;
+    height: fit-content;
     max-height: 100%;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.backupplans_list {
     display: flex;
     flex-direction: column;
 }
@@ -25,8 +30,30 @@
     cursor: pointer;
     transition: border 0.3s cubic-bezier(0.33, 1, 0.68, 1);
     user-select: none;
+    box-sizing: border-box;
 }
-
 .plan_selected {
     border-right: solid 12px mat-color($primary);
+}
+
+.add_plan {
+    background-color: mat-color($primary);
+    border: unset;
+    padding: unset;
+    justify-content: center;
+    margin-top: 20px;
+}
+.add_plan mat-icon {
+    transform: scale(1.4);
+}
+
+// drag-drop animations
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.backupplans_list.cdk-drop-list-dragging .plan:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

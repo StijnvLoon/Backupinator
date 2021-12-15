@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { LoaderComponent } from './components/backup-plan/loader/loader.component';
 import { DirsKeeperComponent } from './components/backup-plan/dirs-keeper/dirs-keeper.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DirsKeeperComponent } from './components/backup-plan/dirs-keeper/dirs-k
     BrowserAnimationsModule,
     MatButtonModule,
     MatRippleModule,
-    MatIconModule
+    MatIconModule,
+    DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,7 +7,7 @@ const electron = (<any>window).require('electron');
 })
 export class BackupPlanService {
 
-  plans: BackupPlan[]
+  backupPlans: BackupPlan[]
   // plans: BackupPlan[] = [
   //   new BackupPlan('General', ['F:\\backups'], []),
   //   new BackupPlan('Test', [], []),
@@ -19,27 +19,50 @@ export class BackupPlanService {
   selectedBackupPlan: BackupPlan
 
   constructor(private zone: NgZone) {
-    electron.ipcRenderer.send('retrieve-usersettings', this.plans);
+    electron.ipcRenderer.send('retrieve-usersettings', this.backupPlans);
     electron.ipcRenderer.on('retrieve-usersettings-reply', (event, retrievedPlans) => {
       this.zone.run(() => {
         if(retrievedPlans == undefined) {
-          this.plans = [
+          this.backupPlans = [
             new BackupPlan('Example plan', [], [])
           ]
           this.saveBackupPlans()
         } else {
-          this.plans = retrievedPlans
-          this.selectedBackupPlan = this.plans[0]
+          this.backupPlans = retrievedPlans
+          this.selectedBackupPlan = this.backupPlans[0]
         }
       })
     })
   }
 
   getBackupPlans(): BackupPlan[] {
-    return this.plans
+    return this.backupPlans
   }
 
   saveBackupPlans(): void {
-    electron.ipcRenderer.send('save-usersettings', this.plans);
+    electron.ipcRenderer.send('save-usersettings', this.backupPlans);
+  }
+
+  addBackupPlan(plan: BackupPlan = new BackupPlan('New backupplan')) {
+    this.backupPlans.push(plan)
+    this.selectedBackupPlan = this.backupPlans[this.backupPlans.indexOf(plan)]
+    this.saveBackupPlans()
+  }
+
+  removeBackupPlan(plan: BackupPlan | number) {
+    let index;
+
+    if(typeof plan == 'number') {
+      index = plan
+      this.backupPlans.splice(plan, 1)
+    } else {
+      index = this.backupPlans.indexOf(plan)
+      this.backupPlans.splice(index, 1)
+    }
+
+    if(index == 0) index++;
+
+    this.selectedBackupPlan = this.backupPlans[index -= 1]
+    this.saveBackupPlans()
   }
 }

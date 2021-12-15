@@ -1,6 +1,12 @@
 <div class="container">
-    <div class="plan mat-elevation-z2" *ngFor="let plan of getPlans()" (click)="setSelectedPlan(plan)"
-        [class.plan_selected]="isSelectedPlan(plan)" matRipple>
-        {{plan.name}}
+    <div class="backupplans_list" cdkDropList (cdkDropListDropped)="onPlanDropped($event)" @ListAnim>
+        <div class="plan mat-elevation-z2" *ngFor="let plan of getPlans()" (click)="setSelectedPlan(plan)" cdkDrag
+            cdkDragLockAxis="y" cdkDragBoundary=".backupplans_list" [class.plan_selected]="isSelectedPlan(plan)"
+            matRipple @ListItemAnim>
+            {{plan.name}}
+        </div>
+    </div>
+    <div class="plan add_plan" (click)="addPlan()" matRipple>
+        <mat-icon>add</mat-icon>
     </div>
 </div>

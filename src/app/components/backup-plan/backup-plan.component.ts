@@ -20,4 +20,8 @@ export class BackupPlanComponent {
   updateSelectedPlan() {
     this.backupPlanService.saveBackupPlans()
   }
+
+  deleteSelectedPlan() {
+    this.backupPlanService.removeBackupPlan(this.getSelectedPlan())
+  }
 }
