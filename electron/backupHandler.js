@@ -9,14 +9,13 @@ class BackupHandler {
     constructor(onProgressUpdate) {
         this.onProgressUpdate = onProgressUpdate
         ipcMain.on('backup', (event, data) => {
-            // this.makeBackup(event, JSON.parse(data))
-            require('child_process').exec('start "" "c:\\users"');
+            this.makeBackup(event, JSON.parse(data))
         })
     }
 
     async makeBackup(event, backupPlan) {
 
-        const content = this.getAllContent(backupPlan.sourceDirs)
+        const content = await this.getAllContent(backupPlan.sourceDirs)
 
         for (const targetDir of backupPlan.targetDirs) {
             //create main folder
@@ -59,11 +58,18 @@ class BackupHandler {
         }
     }
 
-    getAllContent(sourceDirs) {
+    async getAllContent(sourceDirs) {
         let folders = [];
 
         sourceDirs.forEach(sourceDir => {
-            folders = folders.concat(this.getDirs(sourceDir))
+            if (fs.lstatSync(sourceDir).isDirectory()) {
+                folders = folders.concat({
+                    "folder": sourceDir,
+                    "dirs": this.getDirs(sourceDir)
+                })
+            } else {
+                folders.push(sourceDir)
+            }
         })
 
         return folders

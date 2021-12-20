@@ -1,9 +1,7 @@
-<!-- TODO verbeteren -->
-<div style="display: flex;">
-    <p style="width: 100%;">{{name}}:</p>
-    <button (click)="openSelector()">open</button>
+<div class="header">
+    <p>{{name}}:</p>
+    <button class="mat-elevation-z2" (click)="openSelector()" matRipple>Select</button>
 </div>
-<!-- <p class="header">{{name}}:</p> -->
 <div class="dirs_list mat-elevation-z1">
     <div class="dir" *ngFor="let dir of dirs">
         <p>{{dir}}</p>

@@ -1,8 +1,21 @@
 @import "../../../../theme.scss";
 
 .header {
+    display: flex;
+    margin-bottom: 5px;
+}
+.header p {
     font-size: 1.4em;
     margin-bottom: 4px;
+    width: 100%;
+}
+.header button {
+    color: white;
+    width: fit-content;
+    border: unset;
+    cursor: pointer;
+    background-color: mat-color($primary);
+    border-radius: 2px;
 }
 
 .dirs_list {

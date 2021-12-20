@@ -12,7 +12,4 @@ export class FolderService {
     electron.ipcRenderer.send('open-folder', folder);
   }
 
-  getDirectoriesInForlder(folder: string) {
-    console.log("TODO: getdirectories")
-  }
 }

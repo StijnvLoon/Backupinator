@@ -24,4 +24,14 @@ export class BackupPlanComponent {
   deleteSelectedPlan() {
     this.backupPlanService.removeBackupPlan(this.getSelectedPlan())
   }
+
+  onSourceDirsUploaded(dirs: string[]) {
+    this.getSelectedPlan().sourceDirs = this.getSelectedPlan().sourceDirs.concat(dirs)
+    this.backupPlanService.saveBackupPlans()
+  }
+
+  onTargetDirsUploaded(dirs: string[]) {
+    this.getSelectedPlan().targetDirs = this.getSelectedPlan().targetDirs.concat(dirs)
+    this.backupPlanService.saveBackupPlans()
+  }
 }

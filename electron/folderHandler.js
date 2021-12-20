@@ -1,5 +1,5 @@
 const { ipcMain } = require('electron')
-const fs = require("fs")
+const { spawn } = require('child_process');
 
 class FolderHandler {
 
@@ -10,7 +10,12 @@ class FolderHandler {
     }
 
     openFolder(folder) {
-        require('child_process').exec(`start "" ${folder}`);
+        const path = folder || '=';
+        let p = spawn('explorer', [path]);
+        p.on('error', (err) => {
+            p.kill();
+            return callback(err);
+        });
     }
 }
 

@@ -8,7 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "electron": "ng build --base-href ./ && electron .",
+    "electron": "ng build --base-href ./ && electron --trace-warnings .",
     "electron-export": "electron-packager ./ backupinator --platform=win32 --arch=x64 --prune --overwrite"
   },
   "private": true,

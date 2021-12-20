@@ -1,34 +1,32 @@
-.dialog_container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+@import "../../../theme.scss";
+
 .dialog_title {
     display: flex;
-    justify-content: space-between;
-}
-.dialog_body {
-    height: 100%;
-}
-.dialog_footer .mat-dialog-actions {
-    display: flex;
-    justify-content: space-between;
-}
-.dialog_footer button {
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
-.dialog_form {
-    width: 100%;
-    display: flex;
     flex-direction: column;
 }
-.dialog_form_section {
-    width: 100%;
+
+.droparea {
+    width: -webkit-fill-available;
+    height: 200px;
+    background-color: transparent;
+    border: 4px dashed mat-color($primary);
+    border-radius: 4px;
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
 }
-.dialog_form_section_object {
-    width: 100%;
+.droparea p {
+    font-size: 1.6em;
+    pointer-events: none;
+    color: mat-color($primary);
+    letter-spacing: normal;
+    margin: unset;
+    transition: letter-spacing 0.2s ease;
+}
+.droparea_dragging {
+    border-radius: 50px;
+}
+.droparea_dragging p {
+    letter-spacing: 2px;
 }
