@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DirsPickerDialog } from '../dialogs/dirs-picker/dirs-picker.dialog';
+import { SettingsDialog } from '../dialogs/settings/settings.dialog';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,13 @@ export class DialogService {
 
     dialogRef.afterClosed().subscribe(async data => {
       onResult(data)
+    })
+  }
+
+  showSettingsDialog() {
+    this.dialog.open(SettingsDialog, {
+      width: this.dialogWidth,
+      height: '80%'
     })
   }
 }

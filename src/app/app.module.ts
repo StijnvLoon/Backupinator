@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BackupPlansListComponent } from './components/backup-plans-list/backup-plans-list.component';
 import { BackupPlanComponent } from './components/backup-plan/backup-plan.component';
+import { SettingsComponent } from './components/settings/settings.component';
 import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from './components/backup-plan/loader/loader.component';
 import { DirsKeeperComponent } from './components/backup-plan/dirs-keeper/dirs-keeper.component';
@@ -19,6 +20,7 @@ import { DialogModule } from './dialogs/dialog.module';
     BackupPlanComponent,
     LoaderComponent,
     DirsKeeperComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
