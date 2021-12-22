@@ -8,11 +8,17 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class SettingsDialog {
 
+    selectedCategory: number = 0
+
     constructor(
         private dialogRef: MatDialogRef<SettingsDialog>
     ) { }
 
     cancel() {
         this.dialogRef.close()
+    }
+
+    setSelectedCategory(index: number) {
+        this.selectedCategory = index
     }
 }

@@ -5,6 +5,24 @@
     </div>
 
     <div class="dialog_body">
+        <div class="grid">
+            <div class="grid_item categories">
+                <div class="category" matRipple [class.category_selected]="selectedCategory == 0"
+                    (click)="setSelectedCategory(0)">
+                    <span>Appearance</span>
+                    <div class="line"></div>
+                </div>
+                <div class="category" matRipple [class.category_selected]="selectedCategory == 1"
+                    (click)="setSelectedCategory(1)">
+                    <span>Version</span>
+                    <div class="line"></div>
+                </div>
+            </div>
+            <div class="grid_item seperator"></div>
+            <div class="grid_item category_settings">
+                <app-settings-version *ngIf="selectedCategory == 1"></app-settings-version>
+            </div>
+        </div>
     </div>
 
     <div class="dialog_footer">
